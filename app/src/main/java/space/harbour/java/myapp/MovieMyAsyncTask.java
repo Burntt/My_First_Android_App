@@ -1,16 +1,12 @@
 package space.harbour.java.myapp;
 
 import android.os.AsyncTask;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -18,20 +14,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
-
-public class MyAsyncTask extends AsyncTask<String, Integer, List<Student>> {
+public class MovieMyAsyncTask extends AsyncTask<String, Integer, List<Movie>> {
     private URL url;
     private RecyclerView v;
 
-    public MyAsyncTask(String s, RecyclerView view) throws MalformedURLException {
+    public MovieMyAsyncTask(String s, RecyclerView view) throws MalformedURLException {
         url = new URL(s);
         v = view;
     }
 
     @Override
-    protected List<Student> doInBackground(String[] objects) {
-        List<Student> students = new ArrayList<>();
+    protected List<Movie> doInBackground(String[] objects) {
+        List<Movie> movies = new ArrayList<>();
         try {
             HttpURLConnection c = (HttpURLConnection) url.openConnection();
             StringBuilder response = new StringBuilder();
@@ -48,7 +42,7 @@ public class MyAsyncTask extends AsyncTask<String, Integer, List<Student>> {
 
             int n = array.length();
             for (int i = 0; i < n; i++) {
-                students.add(Student.fromJsonObject(array.getJSONObject(i)));
+                movies.add(Movie.fromJsonObject(array.getJSONObject(i)));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,14 +50,13 @@ public class MyAsyncTask extends AsyncTask<String, Integer, List<Student>> {
             e.printStackTrace();
         }
 
-        return students;
+        return movies;
     }
 
     @Override
-    protected void onPostExecute(List<Student> students) {
-        super.onPostExecute(students);
-
-        MyAdapter adapter = new MyAdapter(students);
-        v.setAdapter(adapter);
+    protected void onPostExecute(List<Movie> movies) {
+        super.onPostExecute(movies);
+        MovieListAdapter movieAdapter = new MovieListAdapter(movies);
+        v.setAdapter(movieAdapter);
     }
 }

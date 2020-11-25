@@ -27,7 +27,7 @@ public class MovieListAdapter extends RecyclerView.Adapter {
             super(itemView);
             director = itemView.findViewById(R.id.movie_director);
             title = itemView.findViewById(R.id.movie_title);
-            year = itemView.findViewById(R.id.movie_view);
+            year = itemView.findViewById(R.id.movie_year);
             posterUrl = itemView.findViewById(R.id.movie_posterUrl);
         }
     }
@@ -45,7 +45,7 @@ public class MovieListAdapter extends RecyclerView.Adapter {
         movieViewHolder.director.setText(movie.director);
         movieViewHolder.title.setText(movie.title);
         movieViewHolder.year.setText(movie.year);
-        movieViewHolder.posterUrl.setImageResource(movie.posterUrl);
+        //movieViewHolder.posterUrl.setImageResource(movie.posterUrl);
 
     }
 

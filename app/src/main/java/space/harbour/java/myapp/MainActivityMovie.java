@@ -1,23 +1,18 @@
 package space.harbour.java.myapp;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityMovie extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.Adapter movieAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -31,23 +26,15 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new MyAdapter(new ArrayList<Student>());
-        recyclerView.setAdapter(mAdapter);
+        movieAdapter = new MovieListAdapter(new ArrayList<Movie>());
+        recyclerView.setAdapter(movieAdapter);
 
         try {
-            new MyAsyncTask("https://api.npoint.io/f500fe055fb5e9469bc7", recyclerView).execute();
+            new MovieMyAsyncTask("http://0.0.0.0:4567/movies", recyclerView).execute();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
-
-//            try {
-//        new MyAsyncTask("http://0.0.0.0:4567/movies", recyclerView).execute();
-//    } catch (MalformedURLException e) {
-//        e.printStackTrace();
-//    }
-//}
-
 
     public void showToast(View v) {
         Intent intent = new Intent(this, SecondActivity.class);
