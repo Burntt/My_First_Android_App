@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,8 +19,8 @@ public class MovieMyAsyncTask extends AsyncTask<String, Integer, List<Movie>> {
     private URL url;
     private RecyclerView v;
 
-    public MovieMyAsyncTask(String s, RecyclerView view) throws MalformedURLException {
-        url = new URL(s);
+    public MovieMyAsyncTask(URL s, RecyclerView view) throws MalformedURLException {
+        url = s;
         v = view;
     }
 
@@ -27,7 +28,9 @@ public class MovieMyAsyncTask extends AsyncTask<String, Integer, List<Movie>> {
     protected List<Movie> doInBackground(String[] objects) {
         List<Movie> movies = new ArrayList<>();
         try {
-            HttpURLConnection c = (HttpURLConnection) url.openConnection();
+            HttpURLConnection c = (HttpURLConnection)  url.openConnection();
+            c.setRequestProperty("Accept", "application/json");
+
             StringBuilder response = new StringBuilder();
             try {
                 InputStreamReader in = new InputStreamReader(c.getInputStream(), "UTF-8");

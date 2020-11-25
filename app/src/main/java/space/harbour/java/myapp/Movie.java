@@ -5,42 +5,41 @@ import org.json.JSONObject;
 
 public class Movie {
 
-    public String director;
+    //public String director;
     public String title;
-    public Integer year;
-    public String posterUrl;
+    public String genre;
+    public Integer releaseDate;
+    public String poster;
 
-    public Movie(String title, String director, Integer year, String posterUrl) {
-        this.director = director;
+    public Movie(String title, String genre, Integer releaseDate, String poster) {
+        //this.director = director;
         this.title = title;
-        this.year = year;
-        this.posterUrl = posterUrl;
+        this.genre = genre;
+        this.releaseDate = releaseDate;
+        this.poster = poster;
+
     }
 
     public JSONObject toJsonObject() throws JSONException {
         JSONObject object = new JSONObject();
-        object.put("director", director);
+        //object.put("director", director);
         object.put("title", title);
-        object.put("year", year);
-        object.put("posterUrl", posterUrl);
+        object.put("genre", genre);
+        object.put("releaseDate", releaseDate);
+        object.put("poster", poster);
         return null;
     }
 
     public static Movie fromJsonObject(JSONObject object) throws JSONException {
-        String director = object.getString("name");
+        //String director = object.getString("director");
         String title = object.getString("title");
-        int year = object.getInt("year");
-        String postUrl = object.getString("posterUrl");
-        return new Movie(director, title, year, postUrl);
+        String genre = object.getString("genre");
+        int releaseDate = object.getInt("releaseDate");
+        String poster = object.getString("poster");
+
+        return new Movie(title, genre, releaseDate, poster);
     }
 
-    public String getDirector() {
-        return director;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
-    }
 
     public String getTitle() {
         return title;
@@ -50,21 +49,28 @@ public class Movie {
         this.title = title;
     }
 
-    public Integer getYear() {
-        return year;
+
+    public Integer getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setReleaseDate(Integer releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    public String getPosterUrl() {
-        return posterUrl;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setPosterUrl(String posterUrl) {
-        this.posterUrl = posterUrl;
+    public String getPoster() {
+        return poster;
     }
 
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
 }

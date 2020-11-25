@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivityMovie extends AppCompatActivity {
@@ -30,8 +33,9 @@ public class MainActivityMovie extends AppCompatActivity {
         recyclerView.setAdapter(movieAdapter);
 
         try {
-            new MovieMyAsyncTask("http://0.0.0.0:4567/movies", recyclerView).execute();
-        } catch (MalformedURLException e) {
+            URL url = new URL("http://192.168.65.129:4567/movies");
+            new MovieMyAsyncTask(url, recyclerView).execute();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
