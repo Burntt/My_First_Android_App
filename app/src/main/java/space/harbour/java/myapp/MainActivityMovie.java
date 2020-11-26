@@ -33,7 +33,7 @@ public class MainActivityMovie extends AppCompatActivity {
         recyclerView.setAdapter(movieAdapter);
 
         try {
-            URL url = new URL("http://192.168.65.129:4567/movies");
+            URL url = new URL("http://locahalhost/4567/movies");
             new MovieMyAsyncTask(url, recyclerView).execute();
         } catch (IOException e) {
             e.printStackTrace();
